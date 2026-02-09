@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House Price Prediction</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* PAGE CONTROL */
+        .page {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+
+        /* IMAGE */
+        .image-container {
+            margin-top: 40px;
+        }
+        .image-container img {
+            width: 260px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 12px 25px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+
+        /* FORM */
+        form {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            width: 450px;
+            margin: 30px auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 7px;
+            margin-top: 4px;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: green;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 26px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 🔹 PAGE 1 : IMAGE + NAME -->
+<div id="page1" class="page active">
+
+    <h1>House Price Prediction</h1>
+
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='house.jpg') }}" alt="House Image">
+    </div>
+
+    <div class="footer">
+        Project By <br>
+        <span style="color:#007bff; font-size:34px;">
+            J. Nagapavani
+        </span>
+    </div>
+
+    <button onclick="goToForm()">Go to Prediction Form</button>
+</div>
+
+<!-- 🔹 PAGE 2 : FORM -->
+<div id="page2" class="page">
+
+    <h1>House Price Prediction Form</h1>
+
+    <form action="/predict" method="post">
+
+        <label>Bedrooms</label>
+        <input type="number" name="bedrooms" required>
+
+        <label>Bathrooms</label>
+        <input type="number" name="bathrooms" required>
+
+        <label>Sqft Living</label>
+        <input type="number" name="sqft_living" required>
+
+        <label>Sqft Lot</label>
+        <input type="number" name="sqft_lot" required>
+
+        <label>Floors</label>
+        <input type="number" name="floors" required>
+
+        <label>Waterfront</label>
+        <input type="number" name="waterfront" required>
+
+        <label>View</label>
+        <input type="number" name="view" required>
+
+        <label>Condition</label>
+        <input type="number" name="condition" required>
+
+        <label>Sqft Above</label>
+        <input type="number" name="sqft_above" required>
+
+        <label>Sqft Basement</label>
+        <input type="number" name="sqft_basement" required>
+
+        <label>Year Built</label>
+        <input type="number" name="yr_built" required>
+
+        <label>Year Renovated</label>
+        <input type="number" name="yr_renovated" required>
+
+        <label>City</label>
+        <input type="number" name="city" required>
+
+        <label>Country</label>
+        <input type="number" name="country" required>
+
+        <label>Year</label>
+        <input type="number" name="year" required>
+
+        <label>Month</label>
+        <input type="number" name="month" required>
+
+        <label>Day</label>
+        <input type="number" name="day" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+    {% endif %}
+
+    <button onclick="goBack()">⬅ Back</button>
+</div>
+
+<script>
+    function goToForm() {
+        document.getElementById("page1").classList.remove("active");
+        document.getElementById("page2").classList.add("active");
+    }
+
+    function goBack() {
+        document.getElementById("page2").classList.remove("active");
+        document.getElementById("page1").classList.add("active");
+    }
+</script>
+
+</body>
+</html>
